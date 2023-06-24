@@ -48,6 +48,13 @@ export default function Home() {
     setPickUp(!pickUp)
   }
 
+  let handleClear = () => {
+    dispatch({
+        type: 'clear',
+        initialItem: initialItem
+    }) 
+  }
+
 
   let getPrice = (price, pickUp) => {
     let afteTax = (price * (1 + TAX_RATE)).toFixed(2)
@@ -63,20 +70,21 @@ export default function Home() {
       </Head>
       <h1 class="text-center text-2xl font-bold mt-2">菜单</h1>
       <div class="flex text-center">
-        <div class="basis-1/4"></div>
         <div class="basis-1/4">
           <input type="checkbox" id="pickup" name="pickup" checked={pickUp} onChange={handleChangPickup}></input>
           <label htmlFor="pickup"> Pick Up</label>
         </div>
-
         <div class="basis-1/4">
           <Search allItems={item} onClickSearchResult={handleIncreaseItem}></Search>
+        </div>
+        <div class="basis-1/4">
+          <span class="cursor-pointer font-bold" onClick={handleClear}>清空</span>
         </div>
       </div>
 
 
-      <h2 class="text-lg font-bold pl-3">总价 Total: </h2>
-      <h2 class="pl-3">{getPrice(Number(item['total'].price), pickUp)}</h2>
+      <h2 class="text-xl font-bold pl-3">总价 Total: </h2>
+      <h2 class="text-xl pl-3">{getPrice(Number(item['total'].price), pickUp)}</h2>
       <div class="border-[1px] border-blue-500 border-solid pl-1 ml-2 mt-2">
         <p class="font-bold ">已点：</p>
         { 

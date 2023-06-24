@@ -28,5 +28,10 @@ export default function itemReducer(item, action) {
                 }
             }
         }
+        case 'clear': {
+            return {
+                ...action.initialItem
+            }
+        }
     }
 }

@@ -11,7 +11,10 @@ export default function Search({allItems, onClickSearchResult}) {
 
         let results = []
         if(searchKey !== undefined && searchKey !== '') {
-            results = Object.entries(allItems).filter(([k, v]) => {return k.toLowerCase().indexOf(searchKey) !== -1})
+            results = Object.entries(allItems).filter(
+                ([k, v]) => {
+                    return v.desc.toLowerCase().indexOf(searchKey) !== -1 || v.desc_ch.indexOf(searchKey) !== -1
+                })
         }
         
         setSearchResults(results)
@@ -28,7 +31,7 @@ export default function Search({allItems, onClickSearchResult}) {
         <div >
             <input 
                 type="text" 
-                class="border-[1px] pl-1 border-solid border-black" 
+                class="border-[1px] pl-1 border-solid border-black rounded" 
                 value={inputValue}
                 onChange={search} 
                 placeholder="搜索...">
