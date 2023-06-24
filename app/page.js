@@ -1,113 +1,107 @@
+'use client';
+
+import Head from 'next/head'
 import Image from 'next/image'
+import { Inter } from 'next/font/google'
+import { useState, useReducer } from 'react'
+import Category from './category';
+import Search from './search';
+import itemReducer from './itemReducer';
+import { MENU } from './menu';
+
+
+const inter = Inter({ subsets: ['latin'] })
+
+const initialItem = MENU.reduce((allItems, curValue) => { 
+  return {
+    ...allItems, 
+    ...curValue.items,
+    'total': {desc: 'Total', desc_ch: '总价', price: 0}
+  } 
+}, {})
+
+const TAX_RATE = 0.07
+const PICKUP_DISCOUNT = 0.9
+
 
 export default function Home() {
+  const [pickUp, setPickUp] = useState(false)
+  const [item, dispatch] = useReducer(itemReducer, initialItem);
+
+  let handleIncreaseItem = (e) => {
+    dispatch({
+        type: 'increase',
+        name: e.target.dataset.name,
+        price: e.target.dataset.price
+    }) 
+  }
+
+  let handleDecreaseItem = (e) => {
+    dispatch({
+        type: 'decrease',
+        name: e.target.dataset.name,
+        price: e.target.dataset.price
+    }) 
+  }
+
+  let handleChangPickup = () => {
+    setPickUp(!pickUp)
+  }
+
+
+  let getPrice = (price, pickUp) => {
+    let afteTax = (price * (1 + TAX_RATE)).toFixed(2)
+    let pickUpDiscount = ((price * (1 + TAX_RATE)) * PICKUP_DISCOUNT).toFixed(2)
+
+    return pickUp? `税前: $${price}, 税后: $${afteTax}, 折扣后: $${pickUpDiscount}` : `税前: $${price}, 税后: $${afteTax}`
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <Head>
+        <title>餐馆</title>
+      </Head>
+      <h1 class="text-center text-2xl font-bold mt-2">菜单</h1>
+      <div class="flex text-center">
+        <div class="basis-1/4"></div>
+        <div class="basis-1/4">
+          <input type="checkbox" id="pickup" name="pickup" checked={pickUp} onChange={handleChangPickup}></input>
+          <label htmlFor="pickup"> Pick Up</label>
+        </div>
+
+        <div class="basis-1/4">
+          <Search allItems={item} onClickSearchResult={handleIncreaseItem}></Search>
         </div>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+
+      <h2 class="text-lg font-bold pl-3">总价 Total: </h2>
+      <h2 class="pl-3">{getPrice(Number(item['total'].price), pickUp)}</h2>
+      <div class="border-[1px] border-blue-500 border-solid pl-1 ml-2 mt-2">
+        <p class="font-bold ">已点：</p>
+        { 
+          Object.entries(item).filter(([k, v])=> {return v.quantity > 0 && k != 'total'}).map(([k, v]) => 
+            <p key={k}>{v.desc_ch} {v.desc} ${v.price}
+            <span class='ml-3'>{v.quantity}</span>       
+            <span class="ml-5 font-bold cursor-pointer" data-name={k} data-price={v.price} onClick={handleIncreaseItem}>+</span>
+            <span class="ml-5 font-bold cursor-pointer" data-name={k} data-price={v.price} onClick={handleDecreaseItem}>-</span>
+            </p>
+          )
+        }
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div class="flex">
+          <div class="basis-1/2">
+            {MENU.slice(0, Math.ceil(MENU.length / 2)).map((category) => {
+              return <Category key={category.cat_name} category={category} onIncreaseItem={handleIncreaseItem}> </Category>
+            })}
+          </div>
+          <div class="basis-1/2">
+            {MENU.slice(Math.ceil(MENU.length / 2)).map((category) => {
+              return <Category key={category.cat_name} category={category} onIncreaseItem={handleIncreaseItem}> </Category>
+            })}
+          </div>
       </div>
-    </main>
+    </>
   )
 }
