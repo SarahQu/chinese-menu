@@ -16,7 +16,8 @@ const initialItem = MENU.reduce((allItems, curValue) => {
   return {
     ...allItems, 
     ...curValue.items,
-    'total': {desc: 'Total', desc_ch: '总价', price: 0}
+    'total': {desc: 'Total', desc_ch: '总价', price: 0},
+    'noDiscount': {desc: 'noDiscount', price: 0}
   } 
 }, {})
 
@@ -56,9 +57,9 @@ export default function Home() {
   }
 
 
-  let getPrice = (price, pickUp) => {
+  let getPrice = (price, noDiscount, pickUp) => {
     let afteTax = (price * (1 + TAX_RATE)).toFixed(2)
-    let pickUpDiscount = ((price * (1 + TAX_RATE)) * PICKUP_DISCOUNT).toFixed(2)
+    let pickUpDiscount = (((price - noDiscount) * PICKUP_DISCOUNT + noDiscount) * (1 + TAX_RATE)).toFixed(2)
 
     return pickUp? `税前: $${price}, 税后: $${afteTax}, 折扣后: $${pickUpDiscount}` : `税前: $${price}, 税后: $${afteTax}`
   }
@@ -68,7 +69,7 @@ export default function Home() {
       <Head>
         <title>餐馆</title>
       </Head>
-      <h1 class="text-center text-2xl font-bold mt-2">菜单</h1>
+      <h1 className="text-center text-2xl font-bold mt-2">菜单</h1>
       <div class="flex text-center">
         <div class="basis-1/4">
           <input type="checkbox" id="pickup" name="pickup" checked={pickUp} onChange={handleChangPickup}></input>
@@ -84,7 +85,7 @@ export default function Home() {
 
 
       <h2 class="text-xl font-bold pl-3">总价 Total: </h2>
-      <h2 class="text-xl pl-3">{getPrice(Number(item['total'].price), pickUp)}</h2>
+      <h2 class="text-xl pl-3">{getPrice(Number(item['total'].price), Number(item['noDiscount'].price), pickUp)}</h2>
       <div class="border-[1px] border-blue-500 border-solid pl-1 ml-2 mt-2">
         <p class="font-bold ">已点：</p>
         { 

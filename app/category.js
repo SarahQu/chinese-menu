@@ -6,9 +6,9 @@ export default function Category({category, onIncreaseItem}) {
           <ul>
             {
               Object.entries(category.items).map(([name, value])=> {
-                return (<li 
+                return (<li
                   onClick={onIncreaseItem} 
-                  class="hover:bg-slate-300 cursor-pointer"
+                  class="hover:bg-slate-300 cursor-pointer whitespace-pre-line"
                   key={name} 
                   data-name={name}
                   data-price={value.price}

@@ -1,7 +1,7 @@
 export default function itemReducer(item, action) {
     switch(action.type) {
         case 'increase' : {
-            return {
+            let newItem = {
                 ...item, 
                 [action.name]: {
                     ...item[action.name],
@@ -13,9 +13,21 @@ export default function itemReducer(item, action) {
                     price: (parseFloat(item['total']['price']) + parseFloat(action.price)).toFixed(2)
                 }
             }
+
+            if (action.name.startsWith('ls_')) {
+                newItem = {
+                    ...newItem,
+                    ['noDiscount']: {
+                        ...newItem['noDiscount'],
+                        price: (parseFloat(newItem['noDiscount']['price']) + parseFloat(action.price)).toFixed(2)
+                    }
+                }
+            }
+
+            return newItem
         }
         case 'decrease' : {
-            return {
+            let newItem = {
                 ...item, 
                 [action.name]: {
                     ...item[action.name],
@@ -27,6 +39,18 @@ export default function itemReducer(item, action) {
                     price: (parseFloat(item['total']['price']) - parseFloat(action.price)).toFixed(2)
                 }
             }
+
+            if (action.name.startsWith('ls_')) {
+                newItem = {
+                    ...newItem,
+                    ['noDiscount']: {
+                        ...newItem['noDiscount'],
+                        price: (parseFloat(newItem['noDiscount']['price']) - parseFloat(action.price)).toFixed(2)
+                    }
+                }
+            }
+
+            return newItem
         }
         case 'clear': {
             return {
