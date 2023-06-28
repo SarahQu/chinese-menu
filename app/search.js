@@ -37,7 +37,7 @@ export default function Search({allItems, onClickSearchResult}) {
                 placeholder="搜索...">
             </input>
             {searchResults.length > 0 && (
-                <ul class="absolute z-20 bg-white">
+                <ul class="absolute z-20 bg-slate-50 w-1/3">
                     {searchResults.map(([name, value])=> {
                         return (
                             <li 
