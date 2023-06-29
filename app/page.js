@@ -87,21 +87,10 @@ export default function Home() {
 
       
 
-      <div className="flex flex-wrap-reverse pt-[70px]">
-          <div className="basis-1/3 order-1">
-            {MENU.slice(0, Math.ceil(MENU.length / 2)).map((category) => {
-              return <Category key={category.cat_name} category={category} onIncreaseItem={handleIncreaseItem}> </Category>
-            })}
-          </div>
-          <div className="basis-1/3 order-2">
-            {MENU.slice(Math.ceil(MENU.length / 2)).map((category) => {
-              return <Category key={category.cat_name} category={category} onIncreaseItem={handleIncreaseItem}> </Category>
-            })}
-          </div>
-
-          <div class="basis-1/3 order-3">
-            <div class="fixed w-[33%] border-[1px] border-blue-500 border-solid p-1 mt-2">
-              <p className="text-xl font-bold break-all">已点：</p>
+      <div className="pt-[70px]">
+          <div className="float-left w-[33%] fixed border-[1px] border-blue-500 border-solid p-1 m-2">
+            {/* <div className="fixed"> */}
+              <p className="sm:text-xl font-bold break-all">已点：</p>
               { 
                 Object.entries(item).filter(([k, v])=> {return v.quantity > 0 && k != 'total'}).map(([k, v]) => 
                   <p key={k}>{v.desc_ch} {v.desc} ${v.price}
@@ -111,10 +100,25 @@ export default function Home() {
                   </p>
                 )
               }
-              <p class="text-lg font-bold">总价 Total: </p>
-              <p class="text-lg">{getPrice(Number(item['total'].price), Number(item['noDiscount'].price), pickUp)}</p>
+              <p class="sm:text-lg font-bold">总价 Total: </p>
+              <p class="sm:text-lg">{getPrice(Number(item['total'].price), Number(item['noDiscount'].price), pickUp)}</p>
+            {/* </div> */}
+          </div>
+
+          <div className="float-right w-[66%] sm:flex">
+            <div className="sm:basis-1/2">
+              {MENU.slice(0, Math.ceil(MENU.length / 2)).map((category) => {
+                return <Category key={category.cat_name} category={category} onIncreaseItem={handleIncreaseItem}> </Category>
+              })}
+            </div>
+            <div className="sm:basis-1/2">
+              {MENU.slice(Math.ceil(MENU.length / 2)).map((category) => {
+                return <Category key={category.cat_name} category={category} onIncreaseItem={handleIncreaseItem}> </Category>
+              })}
             </div>
           </div>
+
+          
       </div>
     </>
   )
