@@ -85,10 +85,8 @@ export default function Home() {
         </div>
       </div>
 
-      
-
       <div className="pt-[70px]">
-          <div className="float-left w-[33%] fixed border-[1px] border-blue-500 border-solid p-1 m-2">
+          <div className="float-left w-[33%] fixed z-[-1] border-[1px] border-blue-500 border-solid p-1 m-2">
             {/* <div className="fixed"> */}
               <p className="sm:text-xl font-bold break-all">已点：</p>
               { 
