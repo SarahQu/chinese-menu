@@ -2,6 +2,7 @@ export const MENU = [
     {
         cat_name: 'soup',
         cat_desc: 'Soup',
+        cat_short_desc: '汤',
         cat_desc_ch: '汤羹类',
         items: {
           'sp_1': {desc: 'Wonton Soup small', desc_ch: '云吞汤 （小）', price: 14.00}, 
@@ -30,6 +31,7 @@ export const MENU = [
     {
       cat_name: 'chineseDimSumSpecial',
       cat_desc: 'Chinese Dim Sum Special',
+      cat_short_desc: 'Dim Sum',
       cat_desc_ch: '',
       items: {
         'ds_1': {desc: 'Large Steamed Sticky Rice (1pcs)', desc_ch: '', price: 7.98}, 
@@ -43,6 +45,7 @@ export const MENU = [
     {
       cat_name: 'appetizers',
       cat_desc: 'Appetizers',
+      cat_short_desc: '头抬',
       cat_desc_ch: '头抬',
       items: {
         'veggieSpringRoll': {desc: 'Veggie Spring Roll', desc_ch: '春卷', price: 2.5}, 
@@ -52,6 +55,7 @@ export const MENU = [
     {
         cat_name: 'vegetarian',
         cat_desc: 'Vegetarian',
+        cat_short_desc: '蔬菜',
         cat_desc_ch: '蔬菜类',
         items: {
             'v_1': {desc: 'Cashew Nut Sauteed Dice Vegetables', desc_ch: '腰果什菜丁', price: 16.00},
@@ -73,6 +77,7 @@ export const MENU = [
     {
         cat_name: 'seafood',
         cat_desc: 'Seafood',
+        cat_short_desc: '海鲜',
         cat_desc_ch: '海鲜类',
         items: {
             'sf_1': {desc: 'Deep Fried Prawns', desc_ch: '酥炸大虾球', price: 19.75},
@@ -98,6 +103,7 @@ export const MENU = [
     {
       cat_name: 'sizzlingTeppanPlatters',
       cat_desc: 'Sizzling Teppan Platters',
+      cat_short_desc: '铁板',
       cat_desc_ch: '铁板类',
       items: {
         'sz_1': {desc: 'Fresh Scallops Teppan (in Black Bean Sauce)', desc_ch: '铁板豉汁带子', price: 25.50},
@@ -111,6 +117,7 @@ export const MENU = [
     {
       cat_name: 'duck',
       cat_desc: 'Duck',
+      cat_short_desc: '鸭',
       cat_desc_ch: '鸭类',
       items: {
         'd_1': {desc: 'Barbecued Duck Half', desc_ch: '明炉大烧鸭 （半只）', price: 23.50},
@@ -122,6 +129,7 @@ export const MENU = [
     {
       cat_name: 'chicken',
       cat_desc: 'Chicken',
+      cat_short_desc: '鸡',
       cat_desc_ch: '鸡类',
       items: {
         'c_1': {desc: 'Breaded Almond Chicken', desc_ch: '杏仁酥鸡', price: 20.25},
@@ -142,6 +150,7 @@ export const MENU = [
     {
       cat_name: 'beef',
       cat_desc: 'Beef',
+      cat_short_desc: '牛',
       cat_desc_ch: '牛肉类',
       items: {
         'b_1': {desc: 'Honey Black Pepper Beef', desc_ch: '蜜汁黑椒牛肉', price: 22.75},
@@ -163,6 +172,7 @@ export const MENU = [
     {
       cat_name: 'pork',
       cat_desc: 'Pork',
+      cat_short_desc: '猪',
       cat_desc_ch: '猪肉类',
       items: {
         'p_1': {desc: 'Sweet & Sour Pork (Peking Style)', desc_ch: '京都肉', price: 20.00},
@@ -180,6 +190,7 @@ export const MENU = [
     {
       cat_name: 'chopSuey',
       cat_desc: 'Chop Suey',
+      cat_short_desc: '蔬菜',
       cat_desc_ch: '蔬菜类',
       items: {
         'cs_1': {desc: 'Shrimp Chop Suey', desc_ch: '虾仁杂菜', price: 21.50},
@@ -193,6 +204,7 @@ export const MENU = [
     {
       cat_name: 'eggFuYung',
       cat_desc: 'Egg Fu Yung',
+      cat_short_desc: '芙蓉',
       cat_desc_ch: '芙蓉类',
       items: {
         'e_1': {desc: 'House Special Egg Fu Yung', desc_ch: '招牌芙蓉', price: 19.75},
@@ -205,6 +217,7 @@ export const MENU = [
     {
       cat_name: 'hotPot',
       cat_desc: 'Hot Pot',
+      cat_short_desc: '煲仔',
       cat_desc_ch: '煲仔类',
       items: {
         'hp_1': {desc: 'House Special Hot Pot', desc_ch: '招牌煲', price: 20.75},
@@ -218,6 +231,7 @@ export const MENU = [
     {
       cat_name: 'chowMeinSoft',
       cat_desc: 'Chow Mein (Soft Noodle)',
+      cat_short_desc: '炒面',
       cat_desc_ch: '炒面类',
       items: {
         'cm_s_1': {desc: 'House Special Chow Mein', desc_ch: '招牌炒面', price: 16.75},
@@ -231,6 +245,7 @@ export const MENU = [
     {
       cat_name: 'chowMeinCantonese',
       cat_desc: 'Chow Mein (Cantonese Style)',
+      cat_short_desc: '炒面（广）',
       cat_desc_ch: '炒面类',
       items: {
         'cm_c_1': {desc: 'Cantonese Chow Mein', desc_ch: '广东炒面', price: 20.50},
@@ -250,6 +265,7 @@ export const MENU = [
     {
       cat_name: 'fried rice',
       cat_desc: 'Fried Rice',
+      cat_short_desc: '炒饭',
       cat_desc_ch: '炒饭类',
       items: {
         'fr_1': {desc: 'Yang Chow Fried Rice', desc_ch: '扬州炒饭', price: 16.75},
@@ -267,6 +283,7 @@ export const MENU = [
     {
       cat_name: 'sideOrder',
       cat_desc: 'Side Order',
+      cat_short_desc: 'Side Order',
       cat_desc_ch: '',
       items: {
         'so_1': {desc: 'Consomme', desc_ch: '清汤', price: 2.50},
@@ -286,6 +303,7 @@ export const MENU = [
     {
       cat_name: 'lunchSpecial',
       cat_desc: 'Lunch Special (No 10% Pick Up Discount)',
+      cat_short_desc: 'Lunch Special',
       cat_desc_ch: '',
       items: {
         'ls_1': {desc: '#1 Sweet & Sour Boneless Pork, Beef Fried Rice, Chow Mein', desc_ch: '', price: 10.99},
@@ -308,6 +326,7 @@ export const MENU = [
     {
       cat_name: 'dinnerCombination',
       cat_desc: 'Chef\'s Suggestions Family Dinner Combination Plate',
+      cat_short_desc: 'Dinner Combination',
       cat_desc_ch: '',
       items: {
         'comb_1': {desc: '[A] Chicken Chow Mein, Sweet & Sour Boneless Pork, Deep Fried Prawn\n', desc_ch: '', price: 17.00},

@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 import { useState, useReducer } from 'react'
 import Category from './category';
 import Search from './search';
+import Nav from './nav';
 import itemReducer from './itemReducer';
 import { MENU } from './menu';
 
@@ -65,12 +66,13 @@ export default function Home() {
   }
 
   return (
-    <>
+    <div>
       <Head>
         <title>餐馆</title>
       </Head>
-      <div className='fixed w-full bg-slate-50 p-1'>
-        <h1 className="text-center text-2xl font-bold">菜单</h1>
+      <div className='fixed w-full bg-slate-50 p-2'>
+        {/* <h1 className="text-center text-2xl font-bold">菜单</h1> */}
+        <Nav categories={MENU}></Nav>
         <div class="flex text-center">
           <div class="basis-1/3">
             <input type="checkbox" id="pickup" name="pickup" checked={pickUp} onChange={handleChangPickup}></input>
@@ -85,22 +87,24 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="pt-[70px]">
-          <div className="float-left w-[33%] fixed z-[-1] border-[1px] border-blue-500 border-solid p-1 m-2">
-            {/* <div className="fixed"> */}
+      <div className="pt-[120px] sm:pt-[60px] bg-white">
+          <div className="float-left w-[33%] fixed z-[-1] h-[60%] overflow-y-scroll break-words border-[1px] border-blue-500 border-solid p-1 m-2">
+              <div class="sticky top-0 bg-white">
+                <p class="sm:text-lg font-bold">总价 Total: </p>
+                <p class="sm:text-lg">{getPrice(Number(item['total'].price), Number(item['noDiscount'].price), pickUp)}</p>
+              </div>
               <p className="sm:text-xl font-bold break-all">已点：</p>
+              <ul class="list-disc list-inside">
               { 
                 Object.entries(item).filter(([k, v])=> {return v.quantity > 0 && k != 'total'}).map(([k, v]) => 
-                  <p key={k}>{v.desc_ch} {v.desc} ${v.price}
+                  <li key={k}>{v.desc_ch} {v.desc} ${v.price}
                     <span class='ml-3'>{v.quantity}</span>       
                     <span class="ml-5 font-bold cursor-pointer" data-name={k} data-price={v.price} onClick={handleIncreaseItem}>+</span>
                     <span class="ml-5 font-bold cursor-pointer" data-name={k} data-price={v.price} onClick={handleDecreaseItem}>-</span>
-                  </p>
+                  </li>
                 )
               }
-              <p class="sm:text-lg font-bold">总价 Total: </p>
-              <p class="sm:text-lg">{getPrice(Number(item['total'].price), Number(item['noDiscount'].price), pickUp)}</p>
-            {/* </div> */}
+              </ul>
           </div>
 
           <div className="float-right w-[66%] sm:flex">
@@ -118,6 +122,6 @@ export default function Home() {
 
           
       </div>
-    </>
+    </div>
   )
 }

@@ -37,20 +37,22 @@ export default function Search({allItems, onClickSearchResult}) {
                 placeholder="搜索...">
             </input>
             {searchResults.length > 0 && (
-                <ul class="absolute bg-slate-50 w-1/3">
-                    {searchResults.map(([name, value])=> {
-                        return (
-                            <li 
-                                class="cursor-pointer hover:bg-slate-300"
-                                key={name} 
-                                data-name={name}
-                                data-price={value.price}
-                                onClick={onClickResult}
-                            >
-                            {value.desc_ch} {value.desc} ${value.price}
-                        </li>)
-                    })}
-                </ul>
+                <div class="">
+                    <ul class="absolute bg-slate-100 w-1/2 sm:w-1/3 max-h-[250px] overflow-auto">
+                        {searchResults.map(([name, value])=> {
+                            return (
+                                <li 
+                                    class="cursor-pointer hover:bg-slate-300"
+                                    key={name} 
+                                    data-name={name}
+                                    data-price={value.price}
+                                    onClick={onClickResult}
+                                >
+                                {value.desc_ch} {value.desc} ${value.price}
+                            </li>)
+                        })}
+                    </ul>
+                </div>
             )}
         </div>
     )
