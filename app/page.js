@@ -22,7 +22,7 @@ const initialItem = MENU.reduce((allItems, curValue) => {
   } 
 }, {})
 
-const TAX_RATE = 0.07
+const TAX_RATE = 0.05
 const PICKUP_DISCOUNT = 0.9
 
 
@@ -59,6 +59,9 @@ export default function Home() {
 
 
   let getPrice = (price, noDiscount, pickUp) => {
+    // 5% 
+    // 先打折，先加税
+
     let afteTax = (price * (1 + TAX_RATE)).toFixed(2)
     let pickUpDiscount = (((price - noDiscount) * PICKUP_DISCOUNT + noDiscount) * (1 + TAX_RATE)).toFixed(2)
 
