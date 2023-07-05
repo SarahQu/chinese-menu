@@ -1,5 +1,33 @@
 export const MENU = [ 
     {
+      cat_name: 'chineseDimSumSpecial',
+      cat_desc: 'Chinese Dim Sum Special',
+      cat_short_desc: 'Dim Sum',
+      cat_desc_ch: '',
+      items: {
+        'ds_1': {desc: 'Large Steamed Sticky Rice (1pcs)', desc_ch: '', price: 7.98}, 
+        'ds_2': {desc: 'Steamed B.B.Q Pork Bun (3pcs)', desc_ch: '', price: 7.98}, 
+        'ds_3': {desc: 'Steamed Siu Mai (Pork Dumpling) (4pcs)', desc_ch: '', price: 7.98},
+        'ds_4': {desc: 'Steamed Shrimp Dumpling (4pcs)', desc_ch: '', price: 7.98},
+        'ds_5': {desc: 'Deep Fried Minced Pork Dumplings (3pcs)', desc_ch: '', price: 8.98},
+        'ds_6': {desc: 'Deep Fried Shrimp Dumplings (4pcs)', desc_ch: '', price: 8.98}
+      }
+    },
+    {
+      cat_name: 'appetizers',
+      cat_desc: 'Appetizers',
+      cat_short_desc: '头抬',
+      cat_desc_ch: '头抬',
+      items: {
+        'ap_1': {desc: 'Veggie Spring Roll', desc_ch: '春卷', price: 2.5}, 
+        'ap_2': {desc: 'BBQ Pork', desc_ch: '蜜味叉烧', price: 13.75}, 
+        'ap_3': {desc: 'Chinese Sausage', desc_ch: '腊肠', price: 13.75}, 
+        'ap_4': {desc: 'Deep Fried Chicken Wings', desc_ch: '炸鸡翅', price: 18.75}, 
+        'ap_5': {desc: 'Lettuce Wrap with Minced Meat', desc_ch: '杂锦生菜包', price: 22.50}, 
+        'ap_6': {desc: 'Deep Fried Wonton with Sweat & Sour Sauce', desc_ch: '酥炸云吞', price: 9.00}, 
+      }
+    },
+    {
         cat_name: 'soup',
         cat_desc: 'Soup',
         cat_short_desc: '汤',
@@ -27,30 +55,6 @@ export const MENU = [
           'sp_20': {desc: 'Mushroom and Egg Soup medium', desc_ch: '蘑菇蛋花汤（中）', price: 15.75}, 
           'sp_21': {desc: 'Mushroom and Egg Soup large', desc_ch: '蘑菇蛋花汤（大）', price: 17.75}, 
         }  
-    },
-    {
-      cat_name: 'chineseDimSumSpecial',
-      cat_desc: 'Chinese Dim Sum Special',
-      cat_short_desc: 'Dim Sum',
-      cat_desc_ch: '',
-      items: {
-        'ds_1': {desc: 'Large Steamed Sticky Rice (1pcs)', desc_ch: '', price: 7.98}, 
-        'ds_2': {desc: 'Steamed B.B.Q Pork Bun (3pcs)', desc_ch: '', price: 7.98}, 
-        'ds_3': {desc: 'Steamed Siu Mai (Pork Dumpling) (4pcs)', desc_ch: '', price: 7.98},
-        'ds_4': {desc: 'Steamed Shrimp Dumpling (4pcs)', desc_ch: '', price: 7.98},
-        'ds_5': {desc: 'Deep Fried Minced Pork Dumplings (3pcs)', desc_ch: '', price: 8.98},
-        'ds_6': {desc: 'Deep Fried Shrimp Dumplings (4pcs)', desc_ch: '', price: 8.98}
-      }
-    },
-    {
-      cat_name: 'appetizers',
-      cat_desc: 'Appetizers',
-      cat_short_desc: '头抬',
-      cat_desc_ch: '头抬',
-      items: {
-        'veggieSpringRoll': {desc: 'Veggie Spring Roll', desc_ch: '春卷', price: 2.5}, 
-        'bbqPork': {desc: 'BBQ Pork', desc_ch: '蜜味叉烧', price: 13.75}, 
-      }
     },
     {
         cat_name: 'vegetarian',
@@ -161,7 +165,7 @@ export const MENU = [
         'b_6': {desc: 'Pan Fried Beef w/Peppers,Onions & Black Bean Sauce', desc_ch: '豉椒炒牛肉', price: 20.75},
         'b_7': {desc: 'Beef with Broccoli', desc_ch: '百家利牛肉', price: 19.00},
         'b_8': {desc: 'Sauteed Beef with Pineapple and Ginger', desc_ch: '紫萝牛肉', price: 20.75},
-        'b_9': {desc: 'Fillet Steak (Chinese Style)', desc_ch: '中式牛肉', price: 21.50},
+        'b_9': {desc: 'Fillet Steak (Chinese Style)', desc_ch: '中式牛柳', price: 21.50},
         'b_10': {desc: 'Braised Bean Curd with Minced Beef', desc_ch: '麻婆豆腐', price: 19.00},
         'b_11': {desc: 'Honey Spicy Ginger Beef', desc_ch: '蜜汁牛柳丝', price: 20.75},
         'b_12': {desc: 'Pan Fried Beef with Gai Lan', desc_ch: '芥蓝炒牛肉', price: 20.75},
@@ -251,7 +255,7 @@ export const MENU = [
         'cm_c_1': {desc: 'Cantonese Chow Mein', desc_ch: '广东炒面', price: 20.50},
         'cm_c_2': {desc: 'Triple-Seafood Chow Mein (Cantonese Style)', desc_ch: '三鲜炒面', price: 20.50},
         'cm_c_3': {desc: 'Chicken Chow Mein with Black Bean Sauce', desc_ch: '豉汁鸡炒面', price: 19.25},
-        'cm_c_4': {desc: 'Pan Fried Rice Vermicelli w/Curry (Singapore Style)', desc_ch: '星洲炒面', price: 19.25},
+        'cm_c_4': {desc: 'Pan Fried Rice Vermicelli w/Curry (Singapore Style)', desc_ch: '星洲炒米', price: 19.25},
         'cm_c_5': {desc: 'Shanghai Chow Mein', desc_ch: '上海粗炒面', price: 19.25},
         'cm_c_6': {desc: 'Pan Fried Rice Noodle with Beef (Dry)', desc_ch: '干炒牛河', price: 19.25},
         'cm_c_7': {desc: 'Fried Rice Noodle w/Chicken or Beef in black bean sauce', desc_ch: '豉椒鸡/牛河', price: 19.25},
