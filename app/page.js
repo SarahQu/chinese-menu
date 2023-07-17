@@ -30,6 +30,12 @@ export default function Home() {
   const [pickUp, setPickUp] = useState(false)
   const [item, dispatch] = useReducer(itemReducer, initialItem);
 
+  // 5% 
+  // 先打折，先加税
+  let pickUpDiscount = 0
+  let afterDiscountPrice = 0
+  let tax = 0
+
   let handleIncreaseItem = (e) => {
     dispatch({
         type: 'increase',
@@ -57,15 +63,27 @@ export default function Home() {
     }) 
   }
 
+  let getPickUpDiscount = () => {
+    let totalPrice = Number(item['total'].price)
+    let noDiscount = Number(item['noDiscount'].price)
 
-  let getPrice = (price, noDiscount, pickUp) => {
-    // 5% 
-    // 先打折，先加税
+    pickUpDiscount = pickUp ? ((totalPrice - noDiscount) * (1 - PICKUP_DISCOUNT)).toFixed(2): 0
+    return pickUpDiscount
+  }
 
-    let afteTax = (price * (1 + TAX_RATE)).toFixed(2)
-    let pickUpDiscount = (((price - noDiscount) * PICKUP_DISCOUNT + noDiscount) * (1 + TAX_RATE)).toFixed(2)
+  let getAfterDiscountPrice = () => {
+    afterDiscountPrice = (Number(item['total'].price) - pickUpDiscount).toFixed(2);
 
-    return pickUp? `税前: $${price}, 税后: $${afteTax}, 折扣后: $${pickUpDiscount}` : `税前: $${price}, 税后: $${afteTax}`
+    return afterDiscountPrice
+  }
+
+  let getTax = () => {
+    tax = (afterDiscountPrice * TAX_RATE).toFixed(2)
+    return tax
+  }
+
+  let getFinalPrice = () => {
+    return (Number(afterDiscountPrice) + Number(tax)).toFixed(2)
   }
 
   return (
@@ -91,10 +109,14 @@ export default function Home() {
       </div>
 
       <div className="pt-[120px] sm:pt-[60px] bg-white">
-          <div className="float-left w-[33%] fixed z-[-1] h-[60%] overflow-y-scroll break-words border-[1px] border-blue-500 border-solid p-1 m-2">
+          <div className="float-left w-[33%] fixed z-[-1] h-[70%] overflow-y-scroll break-words border-[1px] border-blue-500 border-solid p-1 m-2">
               <div class="sticky top-0 bg-white">
-                <p class="sm:text-lg font-bold">总价 Total: </p>
-                <p class="sm:text-lg">{getPrice(Number(item['total'].price), Number(item['noDiscount'].price), pickUp)}</p>
+                <p class="sm:text-lg font-bold">价格 Price: </p>
+                <p class="sm:text-lg">总价（税前）: ${Number(item['total'].price)}</p>
+                <p class="sm:text-lg">自提折扣 Pick Up Discount (10%): ${getPickUpDiscount()}</p>
+                <p class="sm:text-lg">折后价: ${getAfterDiscountPrice()}</p>
+                <p class="sm:text-lg">5% GST: ${getTax()}</p>
+                <p class="sm:text-lg font-bold">总价（税后最终价）: ${getFinalPrice()}</p>
               </div>
               <p className="sm:text-xl font-bold break-all">已点：</p>
               <ul class="list-disc list-inside">
